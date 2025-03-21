@@ -1,4 +1,4 @@
-import { array, boolean, digest, email, int, json, number, object, reference, references, Schema, string, text, timestamp, TypeSchema } from '@colombalink/based-db-schema'
+import { array, boolean, digest, email, geo, int, json, number, object, reference, references, Schema, string, text, timestamp, TypeSchema } from '@colombalink/based-db-schema'
 
 const user: TypeSchema = {
   prefix: 'us',
@@ -31,9 +31,25 @@ const overnightStay: TypeSchema = {
     name: string, // user name used as alias "users/{name}"
     roomCount: number,
     routes: references(['route'], 'Route', ""),
-    bookings: references(['booking'], 'Bookings', "") 
+    bookings: references(['booking'], 'Bookings', ""),
+    location: geo
   }
 }
+
+const stops: TypeSchema = {
+  prefix: 'st',
+  meta: {
+    deletePolicy: {
+      deleteItSelf: true,
+      deleteRelated: [], 
+    }
+  },
+  fields: {
+    name: string, // user name used as alias "users/{name}"
+    type: string 
+  }
+}
+
 
 
 const gust: TypeSchema = {
