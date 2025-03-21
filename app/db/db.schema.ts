@@ -50,6 +50,8 @@ const gust: TypeSchema = {
     lastName: string,
     email: email, // unique
     password: digest,
+    bookings: references(['booking'], 'Bookings', ""), 
+    currentBooking: reference(['booking'], '', "") 
   }
 }
 

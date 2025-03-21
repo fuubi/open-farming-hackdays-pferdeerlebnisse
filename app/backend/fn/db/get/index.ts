@@ -11,6 +11,7 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
     }
   })
 
+
   const { stay } = await based.db.default.get({
     stay: {
       $id: 'os001',

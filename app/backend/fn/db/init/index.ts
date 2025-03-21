@@ -26,7 +26,7 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
     roomCount: 4,
     bookings: [
       {
-        $id: "bk001" 
+        $id: "bk001"
       }
     ],
     routes: [
@@ -40,10 +40,20 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
 
   await based.db.default.set({
     $id: "us001",
-    name: "alice",
+    name: "Dani",
     overnightStay: 'os001'
   })
 
+  const luisa = await based.db.default.set({
+    $id: "ug001",
+    name: "Luisa",
+    bookings: [
+      { $id: "bk001" }
+    ],
+    currentBooking: "bk001"  
+  }) 
+
+  console.log("luisa", luisa)
 
   return {
     hello: "world"
