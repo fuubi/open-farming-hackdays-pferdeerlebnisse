@@ -7,19 +7,22 @@
         "debug": "BUILD_ENV=local node --inspect=13000 scripts/watch.js"
     },
     "dependencies": {
-        "@siemens/ix-icons": "2.2.0",
         "@siemens/ix": "2.7.0",
+        "@siemens/ix-icons": "2.2.0",
         "@siemens/ix-react": "2.7.0",
+        "leaflet": "^1.9.4",
+        "leaflet-gpx": "^2.1.2",
         "react": "18.3.1",
         "react-dom": "18.3.1",
+        "react-leaflet": "^5.0.0",
         "zod": "^3.24.1"
     },
     "devDependencies": {
-        "@colombalink/based-react": "5.2.1",
         "@colombalink/based-client": "6.11.1",
-        "@types/react": "18.3.1",
-        "@types/react-dom": "18.3.1",
+        "@colombalink/based-react": "5.2.1",
         "@colombalink/shared-dev-build": "1.0.0",
-        "@ofhp/app-backend": "workspace:*"
+        "@ofhp/app-backend": "workspace:*",
+        "@types/react": "18.3.1",
+        "@types/react-dom": "18.3.1"
     }
 }

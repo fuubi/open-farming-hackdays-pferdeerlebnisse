@@ -10,6 +10,7 @@ import {
   IxCard,
   IxIcon,
 } from '@siemens/ix-react'
+import GpxMap from './GpxMap'
 
 const sectionStyle: React.CSSProperties = {
   marginBottom: '2rem',
@@ -95,6 +96,7 @@ export const RoutenPage = ({ user }: { user: any }) => {
         {user.name}'s Routen  @ {user.overnightStay.name}
       </h2>
       <RoutesGrid user={user}></RoutesGrid>
+      <GpxMap gpxUrl='https://mpetazzoni.github.io/leaflet-gpx/demo.gpx'></GpxMap>
     </IxContent>
   )
 }
