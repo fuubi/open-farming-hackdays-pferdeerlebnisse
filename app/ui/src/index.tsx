@@ -1,6 +1,5 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { BackendClient } from '@ofhp/app-backend'
 
 import based, { AuthState, BasedClient } from "@colombalink/based-client";
 
@@ -23,33 +22,42 @@ import {
 } from '@siemens/ix-react';
 import { useEffect, useState } from 'react';
 import { AngebotPage } from './AdminAngebot';
+import { RoutenPage } from './AdminRouten';
+import { BuchungenPage } from './AdminBuchungen';
 
 const client = based({ url: "ws://localhost:8001", env: 'app' }, { maxCacheSize: 0 }) as BackendClient
 
 const Root = () => {
   const [user, setUser] = useState()
+  const [page, setPage] = useState('angebot') 
 
   useEffect(() => {
-    client.calls['admin:get'].call({}).then(setUser)
+    client.calls['admin:get'].call({}).then(d => setUser(d.user))
   }, [])
-  console.log("user ..", user)
+
+  console.log("user ....", user)
+  if(!user) return 'loading'
   return (
     <IxApplication style={{ height: '100vh', width: '100vw' }}>
       <IxApplicationHeader name="Pferdeerlebins Adminstration">
-
-
-
         <IxAvatar>
-          <IxDropdownItem label="Logout"></IxDropdownItem>
+          <IxDropdownItem  label="Logout"></IxDropdownItem>
         </IxAvatar>
       </IxApplicationHeader>
       <IxMenu>
-        <IxMenuItem icon="bed">Angebot</IxMenuItem>
-        <IxMenuItem icon="map">Routen</IxMenuItem>
-        <IxMenuItem icon="calendar-check">Buchungen</IxMenuItem>
+        <IxMenuItem onClick={() => setPage('angebot')} icon="bed">Angebot</IxMenuItem>
+        <IxMenuItem onClick={() => setPage('routen')} icon="map">Routen</IxMenuItem>
+        <IxMenuItem onClick={() => setPage('buchungen')} icon="calendar-check">Buchungen</IxMenuItem>
       </IxMenu>
 
-    <AngebotPage></AngebotPage>
+    {
+      page === 'angebot' && <AngebotPage/>
+      ||
+      page === 'routen' && <RoutenPage user={user}/>
+      ||
+      page === 'buchungen' && <BuchungenPage/>
+
+    } 
     </IxApplication>
   );
 };

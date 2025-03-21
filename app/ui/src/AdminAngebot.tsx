@@ -15,7 +15,7 @@ const sectionStyle: React.CSSProperties = {
   marginBottom: '2rem',
 }
 
-const headingStyle: React.CSSProperties = {
+export const headingStyle: React.CSSProperties = {
   fontSize: '1.25rem',
   marginBottom: '1rem',
   color: 'var(--theme-color-primary)',
@@ -33,11 +33,8 @@ const actionsStyle: React.CSSProperties = {
 
 export const AngebotPage = () => {
   return (
-    <IxApplication>
       <IxContent>
-        <IxContentHeader heading="Angebot erstellen" />
-
-        {/* Übernachtungen */}
+        
         <section style={sectionStyle}>
           <h2 style={headingStyle}>Übernachtungen</h2>
           <div style={gridStyle}>
@@ -89,6 +86,5 @@ export const AngebotPage = () => {
           <IxButton>Speichern</IxButton>
         </div>
       </IxContent>
-    </IxApplication>
   )
 }
