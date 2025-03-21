@@ -11,16 +11,15 @@ const zPayload = z.object({
 type Payload = typeof zPayload._type
 
 
+
 const query: BasedQueryFunction<BasedServerFunctionClient, Payload, Output> = async (based, payload, update, error) => {
   const x = await based.db.default.get({
-    $list: {
-      $find: {
-        $traverse: 'children'
-      }
-    },
+    user: {
+      $id: 'us001',
+      $all: true,
+    }
   })
-  console.log(update)
-  console.log(x)
+  console.log("...", x)
   update(x)
   return () => { }
 }

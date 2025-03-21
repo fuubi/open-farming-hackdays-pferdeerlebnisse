@@ -1,7 +1,12 @@
 import { BasedFunctionConfig } from '@colombalink/based-functions'
-
 import { createReadStream, existsSync } from 'fs';
 import path from 'path';
+import fn from './index.js';
+
+
+export interface FnType {
+  'ui:app': typeof fn
+}
 
 const MIME_TYPES = {
     '.html': 'text/html',
