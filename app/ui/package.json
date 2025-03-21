@@ -1,5 +1,5 @@
 {
-    "name": "@template/ui",
+    "name": "@ofhp/ui",
     "type": "module",
     "version": "1.0.0",
     "scripts": {
@@ -17,6 +17,6 @@
         "@types/react": "18.3.1",
         "@types/react-dom": "18.3.1",
         "@colombalink/shared-dev-build": "1.0.0",
-        "@template/app-backend": "workspace:*"
+        "@ofhp/app-backend": "workspace:*"
     }
 }

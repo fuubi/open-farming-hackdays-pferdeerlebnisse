@@ -1,5 +1,5 @@
 import { useQuery } from '@colombalink/based-react'
-import { BackendClient, BasedQueryFunctions } from '@template/app-backend'
+import { BackendClient, BasedQueryFunctions } from '@ofhp/app-backend'
 
 class QueryWrapper {
     query: {

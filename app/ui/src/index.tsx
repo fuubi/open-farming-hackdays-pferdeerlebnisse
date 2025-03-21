@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { BackendClient } from '@template/app-backend'
+import { BackendClient } from '@ofhp/app-backend'
 
 import based, { AuthState, BasedClient } from "@colombalink/based-client";
 const client = based({ url: url.ws, env: 'app' }) as BackendClient

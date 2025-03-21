@@ -1,5 +1,5 @@
 {
-  "name": "@template/app-db",
+  "name": "@ofhp/app-db",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
