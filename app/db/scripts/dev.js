@@ -1,7 +1,7 @@
 import { parseDbSchema, saveOnShutdown, SelvaClusterSpec, startSelvaCluster } from '@colombalink/based-server-cloud'
 
 const spec = new SelvaClusterSpec()
-spec.dir = './.tmp2'
+spec.dir = './.tmp'
 spec.registryPort = 9000
 const server = await startSelvaCluster(spec)
 

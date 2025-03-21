@@ -131,9 +131,9 @@ const route: TypeSchema = {
 export const schema: Schema = {
   languages: ['en', 'de'],
   types: {
+    gust,
     user,
     overnightStay,
-    gust,
     booking,
     route
   },
