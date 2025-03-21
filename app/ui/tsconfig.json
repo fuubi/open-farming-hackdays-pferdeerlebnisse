@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "jsx": "react-jsx",
+      "module": "ESNext",
+      "allowUmdGlobalAccess": true,
+      "moduleResolution": "bundler",
+      "esModuleInterop": false,
+      "skipLibCheck": true,
+      "outDir": "dist",
+      "rootDir": "src",
+      "allowSyntheticDefaultImports": true,
+      "lib": ["DOM", "ESNext", "DOM.Iterable"],
+      "paths": {
+        "@app/*": ["./src/*"]
+      },
+      "types": ["./src/types.d.ts"]
+    },
+    "include": ["./src/**/*"]
+  }

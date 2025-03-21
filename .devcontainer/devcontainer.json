@@ -1,0 +1,53 @@
+{
+	"name": "App Template",
+	"build": {
+        "dockerfile": "../.docker/dev/Dockerfile",
+		"args": {}	
+    },
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"terminal.integrated.shell.linux": "/bin/bash",
+				"editor.tabSize": 4
+			}
+		}
+	  },
+
+	"containerEnv": {
+   		"APP_DATA_DIR": "${containerWorkspaceFolder}/.data"
+  	},
+	"mounts": [
+		// https://code.visualstudio.com/remote/advancedcontainers/add-local-file-mount
+		
+		"type=volume,source=influxdb-data,target=/var/lib/influxdb",
+		
+		"type=bind,source=${localWorkspaceFolder}/.docker/dev/volumes/home/.bashrc,target=/home/dev/.bashrc",
+		"type=bind,source=${localWorkspaceFolder}/.docker/dev/volumes/home/.bash_history,target=/home/dev/.bash_history",
+
+		// local ssh folder
+		"type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/dev/.ssh",
+		
+		// git 
+		"type=bind,source=/home/${localEnv:USER}/.gitconfig,target=/home/dev/.gitconfig,readonly"
+	],
+
+	"runArgs": [
+	],
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	 "forwardPorts": [8086],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "dev",
+	"overrideCommand": true
+}

@@ -1,0 +1,42 @@
+{
+    "tasks": {
+      "dev": {},
+      "debug": {},
+      "build": {
+        "outputs": [
+          "dist/**"
+        ],
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [
+          "tests/**",
+          "infra/**",
+          "fn/**",
+          "src/**",
+          "package.json"
+        ]
+      },
+      "lint": {
+        "outputs": []
+      },
+      "watch": {
+        "dependsOn": [
+          "^build"
+        ],
+        "cache": false
+      },
+      "start": {
+        "dependsOn": [
+          "^build"
+        ],
+        "cache": false
+      },
+      "release": {
+        "outputs": []
+      },
+      "clean": {
+        "outputs": []
+      }
+    }
+  }

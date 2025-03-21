@@ -1,0 +1,13 @@
+{
+    "scripts": {
+        "build": "npx turbo run build", 
+        "watch": "npx turbo run watch",
+        "dev": "npx turbo run dev" 
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "turbo": "2.3.3",
+        "@types/node": "22.13.10"
+    },
+    "packageManager": "pnpm@9.1.4"
+}

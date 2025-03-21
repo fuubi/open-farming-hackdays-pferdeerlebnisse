@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "jsx": "react",
+      "strict": false,
+      "module": "NodeNext",
+      "moduleResolution": "NodeNext",
+      "skipLibCheck": true,
+      "outDir": "dist",
+      "rootDir": "fn",
+      "types": ["node"]
+    },
+    "include": ["fn/**/*"]
+  }
+  

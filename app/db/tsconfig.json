@@ -1,0 +1,14 @@
+{
+    "extends": "@colombalink/tsconfig-nodenext/default.json",
+    "compilerOptions": {
+      "strict": false,
+      "skipLibCheck": true,
+      "outDir": "dist",
+      "rootDirs": ["."],
+      "rootDir": ".",
+      "types": ["node"],
+      "paths": {}
+    },
+    "include": ["db.schema.ts"]
+  }
+  

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <base href="/" />
+  <link rel="icon" href="/Icon.ico" />
+  <link rel="stylesheet" href="./vendor.css">
+  <link rel="stylesheet" href="./index.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Template</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        window.cl = {}
+        await import('./vendor.js')
+        await import('./index.js')
+      } catch (e) {
+        console.log(e)
+        document.getElementById("root-user-status").innerHTML = `
+        <div class="text-center">
+          <p>Sorry. Something went wrong: </p>
+          <p>${e.message}</p>
+        </div>`
+      }
+    });
+  </script>
+</body>
+
+</html>
