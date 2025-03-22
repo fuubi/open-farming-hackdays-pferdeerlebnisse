@@ -37,7 +37,7 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
 
     location: {
       lon: 2638332.313276,
-      lat: 1261373.902711 
+      lat: 1261373.902711
     }
   })
 
@@ -52,7 +52,7 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
     ],
     location: {
       lon: 2650144.905130,
-      lat: 1259839.399965 
+      lat: 1259839.399965
     }
   })
 
@@ -71,10 +71,39 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
     bookings: [
       { $id: "bk001" }
     ],
-    currentBooking: "bk001"  
-  }) 
+    currentBooking: "bk001"
+  })
 
   console.log("luisa", luisa)
+
+
+  // routes
+  await based.db.default.set({
+    $id: "r1001",
+    target: "os001",
+  })
+
+  await based.db.default.set({
+    $id: "r1002",
+    target: "os002",
+  })
+
+
+  await based.db.default.set({
+    $id: "r0001",
+    file: "stone-1.gpx"
+  })
+
+
+  await based.db.default.set({
+    $id: 'rt001',
+    segments: [
+      { $id: "r1001" },
+      { $id: "r0001" },
+      { $id: "r1002" },
+    ]
+  }
+  )
 
   return {
     hello: "world"

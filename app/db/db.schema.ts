@@ -36,19 +36,7 @@ const overnightStay: TypeSchema = {
   }
 }
 
-const stops: TypeSchema = {
-  prefix: 'st',
-  meta: {
-    deletePolicy: {
-      deleteItSelf: true,
-      deleteRelated: [], 
-    }
-  },
-  fields: {
-    name: string, // user name used as alias "users/{name}"
-    type: string 
-  }
-}
+
 
 
 
@@ -103,7 +91,34 @@ const route: TypeSchema = {
   fields: {
     name: string, // user name used as alias "users/{name}"
     stars: number, // 1 - 5  
-    path: string
+    segments: references(['routeStop', 'routeSegment'], '', "") 
+  }
+}
+
+const routeSegment: TypeSchema = {
+  prefix: 'r0',
+  meta: {
+    deletePolicy: {
+      deleteItSelf: true,
+      deleteRelated: [], 
+    }
+  },
+  fields: {
+    file: string
+  }
+}
+
+
+const routeStop: TypeSchema = {
+  prefix: 'r1',
+  meta: {
+    deletePolicy: {
+      deleteItSelf: true,
+      deleteRelated: [], 
+    }
+  },
+  fields: {
+    target: reference(['overnightStay'], '', "") 
   }
 }
 
@@ -135,6 +150,8 @@ export const schema: Schema = {
     user,
     overnightStay,
     booking,
-    route
+    route,
+    routeSegment,
+    routeStop
   },
 }
