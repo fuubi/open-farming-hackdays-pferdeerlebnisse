@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import L from 'leaflet'
 import 'leaflet-gpx'
+import 'leaflet-tilelayer-swiss'
 
 type GpxMapProps = {
   gpxUrl: string // URL to GPX file
@@ -11,78 +12,42 @@ const GpxMap: React.FC<GpxMapProps> = ({ gpxUrl }) => {
   console.log(gpxUrl)
   console.log("data")
   useEffect(() => {
-  const map = L.map(mapContainerRef.current).setView([46.8, 8.2], 8) // Swiss Alps center
-     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-       attribution: '&copy; OpenStreetMap contributors'
-     }).addTo(map)
+    const map = L.map(mapContainerRef.current,
+      {
+        // Use LV95 (EPSG:2056) projection
+        crs: L.CRS.EPSG2056,
+      }
+    )
+    var swissLayer = L.tileLayer.swiss(/* options */);
 
-     
-       const url = 'https://mpetazzoni.github.io/leaflet-gpx/demo.gpx';
-       const options = {
-         async: true,
-         polyline_options: { color: 'red' },
-       };
+    swissLayer.addTo(map);
 
-       const gpx = new L.GPX(url, options).on('loaded', (e) => {
-         map.fitBounds(e.target.getBounds());
-       }).addTo(map);
+    // Add Swiss layer with default options
+    L.tileLayer.swiss().addTo(map);
 
-  },[])
-  // useEffect(() => {
-  // console.log("data")
-  //   if (mapRef.current || !mapContainerRef.current) return // Prevent duplicate maps
+    // Center the map on Switzerland
+    map.fitSwitzerland();
 
-  //   const map = L.map(mapContainerRef.current).setView([46.8, 8.2], 8) // Swiss Alps center
-  //   mapRef.current = map
+    // Add a marker with a popup in Bern
+    L.marker(L.CRS.EPSG2056.unproject(L.point(2600000, 1200000))).addTo(map)
+      .bindPopup('Bern')
+      .openPopup();
 
-  //   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  //     attribution: '&copy; OpenStreetMap contributors'
-  //   }).addTo(map)
+     const options = {
+       async: true,
+       polyline_options: { color: 'red' },
+     };
 
+     new L.GPX(gpxUrl, options).on('loaded', (e) => {
+       map.fitBounds(e.target.getBounds());
+     }).addTo(map);
 
-  //     const url = 'https://mpetazzoni.github.io/leaflet-gpx/demo.gpx';
-  //     const options = {
-  //       async: true,
-  //       polyline_options: { color: 'red' },
-  //     };
-
-  //     const gpx = new L.GPX(url, options).on('loaded', (e) => {
-  //       map.fitBounds(e.target.getBounds());
-  //     }).addTo(map);
-
-  //     console.log(gpx)
-
-  //   const gpxLayer = new (L as any).GPX("http://localhost:8001/gxp/test", {
-  //     async: true,
-  //     marker_options: {
-  //       startIconUrl: 'https://unpkg.com/leaflet-gpx@1.4.0/pin-icon-start.png',
-  //       endIconUrl: 'https://unpkg.com/leaflet-gpx@1.4.0/pin-icon-end.png',
-  //       shadowUrl: 'https://unpkg.com/leaflet-gpx@1.4.0/pin-shadow.png'
-  //     }
-  //   }).on('loaded', function (e: any) {
-  //     map.fitBounds(e.target.getBounds())
-  //   }).addTo(map)
-
-  //   // ✅ Fix: Force resize when window resizes
-  //   const handleResize = () => {
-  //     setTimeout(() => {
-  //       map.invalidateSize()
-  //     }, 200) // Delay to prevent UI glitches
-  //   }
-
-  //   window.addEventListener('resize', handleResize)
-  //   handleResize() // Run once on mount
-
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize)
-  //     map.remove() // Cleanup map on unmount
-  //     mapRef.current = null
-  //   }
-  // }, [gpxUrl, mapRef.current])
+  }, [])
 
   return (
-    <div ref={mapContainerRef} style={{ height: '400px', width: '100%', borderRadius: '8px' }} />
+    <div ref={mapContainerRef} style={{ height: '100%', width: '100%', borderRadius: '8px' }} />
   )
 }
+
 
 export default GpxMap

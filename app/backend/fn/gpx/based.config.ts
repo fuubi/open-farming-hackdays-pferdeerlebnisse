@@ -16,10 +16,11 @@ const MIME_TYPES = {
 
 export const httpResponse = async (based, payload, d, send) => {
     console.log(payload);
-
+    
+    console.log("...")
     // Resolve file path
-    // const filePath = path.join(__dirname, payload.file);
-    const filePath = "/workspaces/clbased-template/app/backend/fn/gpx/test.gpx"
+     const filePath = path.join("/workspaces/clbased-template/app/backend/fn/gpx/", payload.file);
+  console.log(filePath)
     // Check if file exists
     if (!existsSync(filePath)) {
         send('File not found', { ['content-type']: 'text/plain' }, 404);
@@ -29,12 +30,11 @@ export const httpResponse = async (based, payload, d, send) => {
     // Get the file extension
     const ext = path.extname(filePath);
 
-    // Determine the correct Content-Type
-    const contentType = MIME_TYPES[ext] || 'application/octet-stream';
-
-    // Serve the file
     send(createReadStream(filePath), {
-        ['content-type']: contentType
+      'content-type': 'application/gpx+xml',
+      'access-control-allow-origin': '*',
+      'access-control-allow-methods': 'GET, OPTIONS',
+      'access-control-allow-headers': 'Content-Type'
     });
 };
 

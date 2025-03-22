@@ -35,7 +35,8 @@ const MapComponent = ({ name }: { name: string }) => (
     borderRadius: '0.5rem',
     marginTop: '0.5rem'
   }}>
-    📍 Map of {name}
+    
+    <GpxMap gpxUrl='http://localhost:8001/gxp/test.gpx'></GpxMap>
   </div>
 )
 
@@ -96,7 +97,6 @@ export const RoutenPage = ({ user }: { user: any }) => {
         {user.name}'s Routen  @ {user.overnightStay.name}
       </h2>
       <RoutesGrid user={user}></RoutesGrid>
-      <GpxMap gpxUrl='https://mpetazzoni.github.io/leaflet-gpx/demo.gpx'></GpxMap>
     </IxContent>
   )
 }

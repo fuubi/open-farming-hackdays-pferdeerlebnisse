@@ -51,11 +51,13 @@ const Root = () => {
       </IxMenu>
 
     {
-      page === 'angebot' && <AngebotPage/>
-      ||
-      page === 'routen' && <RoutenPage user={user}/>
-      ||
-      page === 'buchungen' && <BuchungenPage/>
+
+<RoutenPage user={user}/>
+      // page === 'angebot' && <AngebotPage/>
+      // ||
+      // page === 'routen' && <RoutenPage user={user}/>
+      // ||
+      // page === 'buchungen' && <BuchungenPage/>
 
     } 
     </IxApplication>
