@@ -3,14 +3,13 @@ import L from 'leaflet'
 import 'leaflet-gpx'
 import 'leaflet-tilelayer-swiss'
 
-type GpxMapProps = {
-  gpxUrl: string // URL to GPX file
-}
+const prefix = 'http://localhost:8001/gxp'
 
-const GpxMap: React.FC<GpxMapProps> = ({ gpxUrl }) => {
+const GpxMap = ({ route }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null)
-
+  console.log(route)
   useEffect(() => {
+
     const map = L.map(mapContainerRef.current,
       {
         // Use LV95 (EPSG:2056) projection
@@ -29,30 +28,38 @@ const GpxMap: React.FC<GpxMapProps> = ({ gpxUrl }) => {
       // Center the map on Switzerland
       map.fitSwitzerland();
 
-      // // Add a marker with a popup in Bern
-      L.marker(L.CRS.EPSG2056.unproject(L.point(2638332.313276, 1261373.902711))).addTo(map)
-          .bindPopup('Stone Ranch')
-          .openPopup();
-
-      
-      L.marker(L.CRS.EPSG2056.unproject(L.point(2650144.905130, 1259839.399965))).addTo(map)
-         .bindPopup('Brogli Horsefarm Schweiz')
-         .openPopup();
-
-      const options = {
-        async: true,
-        polyline_options: { color: 'red' },
-        markers: {
-          startIcon: '',
-          endIcon: '',
+      let creadedMarkers = {} 
+      for (const segment of route.segments) {
+        if (segment.type === 'routeSegment') {
+          new L.GPX(`${prefix}/${segment.file}`, {
+            async: true,
+            polyline_options: { color: 'red' },
+            markers: {
+              startIcon: '',
+              endIcon: '',
+            }
+          }).on('loaded', (e) => {
+            map.fitBounds(e.target.getBounds());
+          }).addTo(map);
         }
-      };
+
+        else if (segment.type === 'routeStop' && !creadedMarkers[segment.id]) {
+          creadedMarkers[segment.id] = true
+          const locaiton = segment.target.location.split(",").map(s => Number(s))
+          L.marker(L.CRS.EPSG2056.unproject(L.point(locaiton))).addTo(map)
+            .bindPopup(segment.target.name)
+            .openPopup();
+
+        }
+      }
+
+      // // // Add a marker with a popup in Bern
 
 
-      new L.GPX(gpxUrl, options).on('loaded', (e) => {
-        map.fitBounds(e.target.getBounds());
+      // L.marker(L.CRS.EPSG2056.unproject(L.point(2650144.905130, 1259839.399965))).addTo(map)
+      //    .bindPopup('Brogli Horsefarm Schweiz')
+      //    .openPopup();
 
-      }).addTo(map);
 
     }, 100)
 

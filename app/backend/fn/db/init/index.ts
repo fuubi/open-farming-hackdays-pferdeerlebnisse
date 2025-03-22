@@ -100,7 +100,7 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
     segments: [
       { $id: "r1001" },
       { $id: "r0001" },
-      { $id: "r1002" },
+      { $id: "r1001" },
     ]
   }
   )

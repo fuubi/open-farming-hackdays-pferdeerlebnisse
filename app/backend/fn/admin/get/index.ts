@@ -20,6 +20,9 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
           segments: {
             $list: {},
             $all: true,
+            target: {
+              $all: true,
+            }
           }
         }
       },

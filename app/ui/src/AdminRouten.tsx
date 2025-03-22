@@ -22,7 +22,7 @@ const headingStyle: React.CSSProperties = {
   color: 'var(--theme-color-primary)',
 }
 
-const MapComponent = ({ name }: { name: string }) => (
+const MapComponent = ({ route }) => (
   <div style={{
     width: '100%',
     height: '150px',
@@ -36,7 +36,7 @@ const MapComponent = ({ name }: { name: string }) => (
     marginTop: '0.5rem'
   }}>
     
-    <GpxMap gpxUrl='http://localhost:8001/gxp/effingen_stoneranch.gpx'></GpxMap>
+    <GpxMap route={route}></GpxMap>
   </div>
 )
 
@@ -80,7 +80,7 @@ const RoutesGrid = ({ user }: { user: any }) => {
           <IxCard key={route.id} style={{ padding: '1rem' }}>
             <h3 style={{ margin: '0 0 0.5rem 0' }}>{route.name}</h3>
             <Stars value={route.stars} />
-            <MapComponent name={route.name} />
+            <MapComponent route={route} />
           </IxCard>
         ))}
       </div>
