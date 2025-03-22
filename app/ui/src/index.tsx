@@ -24,6 +24,10 @@ import { useEffect, useState } from 'react';
 import { AngebotPage } from './AdminAngebot';
 import { RoutenPage } from './AdminRouten';
 import { BuchungenPage } from './AdminBuchungen';
+import { themeSwitcher } from '@siemens/ix';
+
+themeSwitcher.setTheme("theme-classic-light");
+
 
 const client = based({ url: "ws://localhost:8001", env: 'app' }, { maxCacheSize: 0 }) as BackendClient
 
@@ -39,25 +43,38 @@ const Root = () => {
   if(!user) return 'loading'
   return (
     <IxApplication style={{ height: '100vh', width: '100vw' }}>
-      <IxApplicationHeader name="Pferdeerlebins Adminstration">
+      <IxApplicationHeader name="Pferdeerlebins Aargau Adminstration">
+      <div slot="logo">
+        <img 
+        style={{
+            display: "inline-block",
+            maxHeight: "56px",
+            maxWidth: "225px",
+            padding: "8px 4px 8px 12px",
+            verticalAlign: "middle"
+      }}
+
+        src="https://lh5.googleusercontent.com/IAWaOPMUilF2S-BzSGFoLK9yL9LqTgsqXj9Kw52JifhC-NrGnTWMCtcI2LmQP2ydAdtYvDL5lF_869dmtcX1Jq8=w16383" class="lzy1Td" role="img" aria-label="Homepage der Website" jsname="SwcDWb"></img>
+      </div>
         <IxAvatar>
           <IxDropdownItem  label="Logout"></IxDropdownItem>
         </IxAvatar>
       </IxApplicationHeader>
       <IxMenu>
-        <IxMenuItem onClick={() => setPage('angebot')} icon="bed">Angebot</IxMenuItem>
+        <IxMenuItem onClick={() => setPage('angebot')} icon="building1">Angebot</IxMenuItem>
         <IxMenuItem onClick={() => setPage('routen')} icon="map">Routen</IxMenuItem>
-        <IxMenuItem onClick={() => setPage('buchungen')} icon="calendar-check">Buchungen</IxMenuItem>
+        <IxMenuItem onClick={() => setPage('buchungen')} icon="calendar">Buchungen</IxMenuItem>
       </IxMenu>
 
     {
 
-<RoutenPage user={user}/>
-      // page === 'angebot' && <AngebotPage/>
-      // ||
-      // page === 'routen' && <RoutenPage user={user}/>
-      // ||
-      // page === 'buchungen' && <BuchungenPage/>
+      (() => {
+
+        if(page === 'angebot') return <AngebotPage/> 
+        if(page === 'routen') return <RoutenPage user={user}/>
+        if(page === 'buchungen') return <BuchungenPage/>
+        return <div></div>
+      })()
 
     } 
     </IxApplication>

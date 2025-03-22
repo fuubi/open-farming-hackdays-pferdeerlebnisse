@@ -9,8 +9,7 @@ type GpxMapProps = {
 
 const GpxMap: React.FC<GpxMapProps> = ({ gpxUrl }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null)
-  console.log(gpxUrl)
-  console.log("data")
+  
   useEffect(() => {
     const map = L.map(mapContainerRef.current,
       {
@@ -18,6 +17,8 @@ const GpxMap: React.FC<GpxMapProps> = ({ gpxUrl }) => {
         crs: L.CRS.EPSG2056,
       }
     )
+
+    setTimeout(() => {
     var swissLayer = L.tileLayer.swiss(/* options */);
 
     swissLayer.addTo(map);
@@ -41,7 +42,9 @@ const GpxMap: React.FC<GpxMapProps> = ({ gpxUrl }) => {
      new L.GPX(gpxUrl, options).on('loaded', (e) => {
        map.fitBounds(e.target.getBounds());
      }).addTo(map);
+    }, 100)
 
+    
   }, [])
 
   return (
