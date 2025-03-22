@@ -1,7 +1,19 @@
 export function ContentRoutenNetz() {
     return (
       <main>
-  
+
+<section
+  style={{
+    textAlign: 'center',
+    padding: '4rem 1rem',
+    backgroundImage: 'url("./way.jpeg")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    color: 'white' // optional, for contrast
+  }}
+>
+        </section>
+
         {/* Section: Routenetz */}
         <section style={{ textAlign: 'center', padding: '4rem 1rem' }}>
           <h2>Routennetz</h2>
