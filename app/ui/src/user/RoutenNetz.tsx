@@ -8,14 +8,21 @@ const client = based({ url: "ws://localhost:8001", env: 'app' }, { maxCacheSize:
 
 export function ContentRoutenNetz() {
 
-  const [route, setRouten] = useState(null)
+    const [route, setRouten] = useState(null)
 
-  useEffect(() => {
-    client.calls['admin:get'].call({}).then(d => {
-        console.log(d.user.overnightStay.routes[0])
-setRouten(d.user.overnightStay.routes[0])
-    })
-  }, [])
+    useEffect(() => {
+        client.calls['user:getRoutes'].call({}).then(d=> {
+            const all = {
+                segments: []
+            } 
+            for(const route of d.stay.routes) {
+                for(const segment of route.segments) {
+                    all.segments.push(segment)
+                }
+            }
+            setRouten(all)
+        })
+    }, [])
 
     return (
         <main>
@@ -50,7 +57,7 @@ setRouten(d.user.overnightStay.routes[0])
                         marginTop: '0.5rem'
                     }}>
 
-                        {route && <GpxMap route={route}></GpxMap>} 
+                        {route && <GpxMap route={route}></GpxMap>}
                     </div>
                 </div>
             </section>
