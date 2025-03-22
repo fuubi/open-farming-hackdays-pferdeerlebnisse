@@ -36,7 +36,7 @@ const MapComponent = ({ name }: { name: string }) => (
     marginTop: '0.5rem'
   }}>
     
-    <GpxMap gpxUrl='http://localhost:8001/gxp/test.gpx'></GpxMap>
+    <GpxMap gpxUrl='http://localhost:8001/gxp/effingen_stoneranch.gpx'></GpxMap>
   </div>
 )
 
