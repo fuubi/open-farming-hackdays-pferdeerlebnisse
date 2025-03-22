@@ -22,7 +22,7 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
 
   const r = await based.db.default.set({
     $id: 'os001',
-    name: "Place 1",
+    name: "Stone Ranch",
     roomCount: 4,
     bookings: [
       {
@@ -33,8 +33,29 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
       {
         $id: "rt001"
       }
-    ]
+    ],
+
+    location: {
+      lon: 2638332.313276,
+      lat: 1261373.902711 
+    }
   })
+
+
+  await based.db.default.set({
+    $id: 'os002',
+    name: "Brogli Horsefarm Schweiz",
+    roomCount: 3,
+    bookings: [
+    ],
+    routes: [
+    ],
+    location: {
+      lon: 2650144.905130,
+      lat: 1259839.399965 
+    }
+  })
+
 
   console.log(r)
 
