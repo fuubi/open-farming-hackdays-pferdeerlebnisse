@@ -3,7 +3,8 @@ import { BasedServerFunctionClient } from "@colombalink/based-server-cloud"
 
 
 const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, payload, ctx) => {
-  const id = 'os001'
+  const id = payload.stayId
+  console.log("stay id", id)
   const { stay } = await based.db.default.get({
     stay: {
       $id: id,

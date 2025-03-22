@@ -62,6 +62,9 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
     bookings: [
     ],
     routes: [
+      {
+        $id: "rt003",
+      }
     ],
     location: {
       lon: 2650144.905130,

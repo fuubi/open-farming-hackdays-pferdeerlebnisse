@@ -7,22 +7,154 @@ const client = based({ url: "ws://localhost:8001", env: 'app' }, { maxCacheSize:
 
 
 export function ContentRoutenNetz() {
-
+    const [stayId, setStay] = useState("os001")
     const [route, setRouten] = useState(null)
 
     useEffect(() => {
-        client.calls['user:getRoutes'].call({}).then(d=> {
-            const all = {
-                segments: []
-            } 
-            for(const route of d.stay.routes) {
-                for(const segment of route.segments) {
-                    all.segments.push(segment)
-                }
+        console.log("s", stayId)
+        // client.calls['user:getRoutes'].call({stayId}).then(d=> {
+        //     const all = {
+        //         segments: []
+        //     } 
+        //     for(const route of d.stay.routes) {
+        //         for(const segment of route.segments) {
+        //             all.segments.push(segment)
+        //         }
+        //     }
+        //     setRouten(all)
+        // })
+
+        const one = [
+            {
+                "createdAt": 1742639870216,
+                "file": "stone-1.gpx",
+                "id": "r0001",
+                "type": "routeSegment",
+                "updatedAt": 1742640064685
+            },
+            {
+                "target": {
+                    "createdAt": 1742639870210,
+                    "id": "os001",
+                    "location": "2638332.313276,1261373.902711",
+                    "name": "Stone Ranch",
+                    "roomCount": 4,
+                    "type": "overnightStay",
+                    "updatedAt": 1742641546031
+                },
+                "createdAt": 1742639870215,
+                "id": "r1001",
+                "type": "routeStop",
+                "updatedAt": 1742639870215
+            },
+            {
+                "createdAt": 1742641290761,
+                "file": "stone-2.gpx",
+                "id": "r0002",
+                "type": "routeSegment",
+                "updatedAt": 1742641290761
+            },
+            {
+                "target": {
+                    "createdAt": 1742639870210,
+                    "id": "os001",
+                    "location": "2638332.313276,1261373.902711",
+                    "name": "Stone Ranch",
+                    "roomCount": 4,
+                    "type": "overnightStay",
+                    "updatedAt": 1742641546031
+                },
+                "createdAt": 1742639870215,
+                "id": "r1001",
+                "type": "routeStop",
+                "updatedAt": 1742639870215
+            },
+            {
+                "createdAt": 1742641546033,
+                "file": "stone-3.gpx",
+                "id": "r0003",
+                "type": "routeSegment",
+                "updatedAt": 1742641546033
+            },
+            {
+                "target": {
+                    "createdAt": 1742639870210,
+                    "id": "os001",
+                    "location": "2638332.313276,1261373.902711",
+                    "name": "Stone Ranch",
+                    "roomCount": 4,
+                    "type": "overnightStay",
+                    "updatedAt": 1742641546031
+                },
+                "createdAt": 1742639870215,
+                "id": "r1001",
+                "type": "routeStop",
+                "updatedAt": 1742639870215
+            },
+            {
+                "target": {
+                    "createdAt": 1742639870211,
+                    "id": "os002",
+                    "location": "2650144.90513,1259839.399965",
+                    "name": "Brogli Horsefarm Schweiz",
+                    "roomCount": 3,
+                    "type": "overnightStay",
+                    "updatedAt": 1742648723111
+                },
+                "createdAt": 1742639870215,
+                "id": "r1002",
+                "type": "routeStop",
+                "updatedAt": 1742639870215
             }
-            setRouten(all)
-        })
-    }, [])
+        ]
+
+        const two = [
+            {
+                "target": {
+                    "createdAt": 1742639870210,
+                    "id": "os001",
+                    "location": "2638332.313276,1261373.902711",
+                    "name": "Stone Ranch",
+                    "roomCount": 4,
+                    "type": "overnightStay",
+                    "updatedAt": 1742641546031
+                },
+                "createdAt": 1742639870215,
+                "id": "r1001",
+                "type": "routeStop",
+                "updatedAt": 1742639870215
+            },
+            {
+                "createdAt": 1742641546033,
+                "file": "stone-3.gpx",
+                "id": "r0003",
+                "type": "routeSegment",
+                "updatedAt": 1742641546033
+            },
+            {
+                "target": {
+                    "createdAt": 1742639870211,
+                    "id": "os002",
+                    "location": "2650144.90513,1259839.399965",
+                    "name": "Brogli Horsefarm Schweiz",
+                    "roomCount": 3,
+                    "type": "overnightStay",
+                    "updatedAt": 1742648723111
+                },
+                "createdAt": 1742639870215,
+                "id": "r1002",
+                "type": "routeStop",
+                "updatedAt": 1742639870215
+            }
+        ]
+
+        if (stayId === 'os001') {
+            setRouten({ segments: one })
+        } else {
+            setRouten({ segments: two })
+        }
+
+    }, [stayId])
 
     return (
         <main>
@@ -43,21 +175,48 @@ export function ContentRoutenNetz() {
             <section style={{ textAlign: 'center', padding: '4rem 1rem' }}>
                 <h2>Routennetz</h2>
                 <p>Finden Sie Ihre perfekte Reitroute im Kanton Aargau</p>
-                <div style={{ margin: '2rem auto', maxWidth: 800 }}>
-                    <div style={{
-                        width: '100%',
-                        height: '400px',
-                        backgroundColor: '#eee',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#888',
-                        fontStyle: 'italic',
-                        borderRadius: '0.5rem',
-                        marginTop: '0.5rem'
-                    }}>
 
-                        {route && <GpxMap route={route}></GpxMap>}
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'flex-start',
+                        gap: '2rem',
+                        marginTop: '2rem',
+                        maxWidth: 1000,
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        flexWrap: 'wrap',
+                    }}
+                >
+                    {/* Unterkünfte list */}
+                    <div style={{ flex: '1 1 250px', textAlign: 'left' }}>
+                        <h4>Unterkünfte</h4>
+                        <ul style={{ listStyle: 'none', padding: 0 }}>
+
+                            {/* $id: 'os001', */}
+                            <li onClick={() => setStay('os0001')}>🏠 Stone Ranch</li>
+                            <li onClick={() => setStay('os0002')}>🐴 Brogli Horsefarm Schweiz</li>
+                        </ul>
+                    </div>
+
+                    {/* Map container */}
+                    <div style={{ flex: '1 1 600px' }}>
+                        <div
+                            style={{
+                                width: '100%',
+                                height: '400px',
+                                backgroundColor: '#eee',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: '#888',
+                                fontStyle: 'italic',
+                                borderRadius: '0.5rem',
+                            }}
+                        >
+                            {route && <GpxMap route={route} />}
+                        </div>
                     </div>
                 </div>
             </section>
