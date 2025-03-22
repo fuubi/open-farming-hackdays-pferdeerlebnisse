@@ -3,9 +3,6 @@ import { BasedServerFunctionClient } from "@colombalink/based-server-cloud"
 
 
 const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, payload, ctx) => {
-  console.log(based)
-
-
 
   await based.db.default.set({
     $id: 'bk001',
@@ -19,7 +16,17 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
     stars: 4
   })
 
+  await based.db.default.set({
+    $id: 'rt002',
+    name: "Route 2",
+    stars: 3
+  })
 
+  await based.db.default.set({
+    $id: 'rt003',
+    name: "Route 3",
+    stars: 3
+  })
   const r = await based.db.default.set({
     $id: 'os001',
     name: "Stone Ranch",
@@ -31,7 +38,13 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
     ],
     routes: [
       {
-        $id: "rt001"
+        $id: "rt001",
+      },
+      {
+        $id: "rt002",
+      },
+      {
+        $id: "rt003",
       }
     ],
 
@@ -101,6 +114,36 @@ const fn: BasedFunction<BasedServerFunctionClient, any, any> = async (based, pay
       { $id: "r1001" },
       { $id: "r0001" },
       { $id: "r1001" },
+    ]
+  }
+  )
+
+  await based.db.default.set({
+    $id: "r0002",
+    file: "stone-2.gpx"
+  })
+
+  await based.db.default.set({
+    $id: 'rt002',
+    segments: [
+      { $id: "r1001" },
+      { $id: "r0002" },
+      { $id: "r1001" },
+    ]
+  }
+  )
+
+  await based.db.default.set({
+    $id: "r0003",
+    file: "stone-3.gpx"
+  })
+
+  await based.db.default.set({
+    $id: 'rt003',
+    segments: [
+      { $id: "r1001" },
+      { $id: "r0003" },
+      { $id: "r1002" },
     ]
   }
   )
